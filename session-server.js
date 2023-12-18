@@ -52,6 +52,12 @@ app.get("/protected-route", authorizeUser, (req, res) => {
   res.render("protected");
 });
 
+app.get("/logout", authorizeUser, (req, res) => {
+  req.session.authenticated = false;
+  req.session.user = {};
+  res.redirect("/login");
+});
+
 
 app.listen(PORT, () => {
   console.log(`Server is listening on port ${PORT}`);
